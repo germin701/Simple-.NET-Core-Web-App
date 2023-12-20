@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\User\\OneDrive - student.newinti.edu.my\\Desktop\\INTI BCSCUN\\Sem8 Internship\\.NET Core Web App\\SimpleWebApplication\\SimpleWebApplication.csproj": {}
+    "C:\\Users\\User\\OneDrive - student.newinti.edu.my\\Desktop\\INTI BCSCUN\\Sem8 Internship\\.NET Core Web App\\Simple-.NET-Core-Web-App\\SimpleWebApplication\\SimpleWebApplication.csproj": {}
   },
   "projects": {
-    "C:\\Users\\User\\OneDrive - student.newinti.edu.my\\Desktop\\INTI BCSCUN\\Sem8 Internship\\.NET Core Web App\\SimpleWebApplication\\SimpleWebApplication.csproj": {
+    "C:\\Users\\User\\OneDrive - student.newinti.edu.my\\Desktop\\INTI BCSCUN\\Sem8 Internship\\.NET Core Web App\\Simple-.NET-Core-Web-App\\SimpleWebApplication\\SimpleWebApplication.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\User\\OneDrive - student.newinti.edu.my\\Desktop\\INTI BCSCUN\\Sem8 Internship\\.NET Core Web App\\SimpleWebApplication\\SimpleWebApplication.csproj",
+        "projectUniqueName": "C:\\Users\\User\\OneDrive - student.newinti.edu.my\\Desktop\\INTI BCSCUN\\Sem8 Internship\\.NET Core Web App\\Simple-.NET-Core-Web-App\\SimpleWebApplication\\SimpleWebApplication.csproj",
         "projectName": "SimpleWebApplication",
-        "projectPath": "C:\\Users\\User\\OneDrive - student.newinti.edu.my\\Desktop\\INTI BCSCUN\\Sem8 Internship\\.NET Core Web App\\SimpleWebApplication\\SimpleWebApplication.csproj",
+        "projectPath": "C:\\Users\\User\\OneDrive - student.newinti.edu.my\\Desktop\\INTI BCSCUN\\Sem8 Internship\\.NET Core Web App\\Simple-.NET-Core-Web-App\\SimpleWebApplication\\SimpleWebApplication.csproj",
         "packagesPath": "C:\\Users\\User\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\User\\OneDrive - student.newinti.edu.my\\Desktop\\INTI BCSCUN\\Sem8 Internship\\.NET Core Web App\\SimpleWebApplication\\obj\\",
+        "outputPath": "C:\\Users\\User\\OneDrive - student.newinti.edu.my\\Desktop\\INTI BCSCUN\\Sem8 Internship\\.NET Core Web App\\Simple-.NET-Core-Web-App\\SimpleWebApplication\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\User\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -39,6 +39,26 @@
       "frameworks": {
         "net5.0": {
           "targetAlias": "net5.0",
+          "dependencies": {
+            "EF.Core.Repository": {
+              "target": "Package",
+              "version": "[1.0.0.2, )"
+            },
+            "Microsoft.EntityFrameworkCore.SqlServer": {
+              "target": "Package",
+              "version": "[5.0.17, )"
+            },
+            "Microsoft.EntityFrameworkCore.Tools": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[5.0.17, )"
+            },
+            "System.Data.SqlClient": {
+              "target": "Package",
+              "version": "[4.8.5, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",
