@@ -55,7 +55,7 @@ namespace SimpleWebApplication.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Products");
+                    b.ToTable("Staff");
                 });
 #pragma warning restore 612, 618
         }

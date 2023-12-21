@@ -9,7 +9,7 @@ using SimpleWebApplication.Data;
 namespace SimpleWebApplication.Migrations
 {
     [DbContext(typeof(ApplicationDBContext))]
-    [Migration("20231220140915_initial")]
+    [Migration("20231221100307_initial")]
     partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -57,7 +57,7 @@ namespace SimpleWebApplication.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Products");
+                    b.ToTable("Staff");
                 });
 #pragma warning restore 612, 618
         }

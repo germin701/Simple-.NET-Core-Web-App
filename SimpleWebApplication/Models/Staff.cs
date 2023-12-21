@@ -8,6 +8,7 @@ namespace SimpleWebApplication.Models
 {
     public class Staff
     {
+        [Display(Name = "StaffID")]
         public int Id { get; set; }
         [Required(ErrorMessage = "Please enter staff name")]
         public string Name { get; set; }
@@ -19,7 +20,7 @@ namespace SimpleWebApplication.Models
         public string Phone { get; set; }
         [Required(ErrorMessage = "Please enter staff address")]
         public string Address { get; set; }
-        [Required(ErrorMessage = "Please enter staff department")]
+        [Required(ErrorMessage = "Please select a department")]
         public string Department { get; set; }
         [Required(ErrorMessage = "Please enter staff salary")]
         public string Salary { get; set; }

@@ -14,6 +14,6 @@ namespace SimpleWebApplication.Data
 
         }
 
-        public DbSet<Staff> Products { get; set; }
+        public DbSet<Staff> Staff { get; set; }
     }
 }
