@@ -29,7 +29,7 @@ namespace SimpleWebApplication.Controllers
                 return View(staffs);
             }
 
-            var allstaffs = _dBContext.Staff.ToList();
+            var allstaffs = _dBContext.Staff.FromSqlRaw("SELECT * FROM Staff").ToList();
             return View(allstaffs);
         }
 
@@ -42,19 +42,32 @@ namespace SimpleWebApplication.Controllers
         public IActionResult Create(Staff staff)
         {
             string msg = "";
-            bool isSaved = _staffManager.Add(staff);
-            if(isSaved)
+            var sql = "INSERT INTO Staff (Name, Gender, Email, Phone, Address, Department, Salary) " +
+              "VALUES (@Name, @Gender, @Email, @Phone, @Address, @Department, @Salary)";
+
+            var parameters = new[]
             {
+                new SqlParameter("@Name", staff.Name),
+                new SqlParameter("@Gender", staff.Gender),
+                new SqlParameter("@Email", staff.Email),
+                new SqlParameter("@Phone", staff.Phone),
+                new SqlParameter("@Address", staff.Address),
+                new SqlParameter("@Department", staff.Department),
+                new SqlParameter("@Salary", staff.Salary),
+            };
+
+            try
+            {
+                _dBContext.Database.ExecuteSqlRaw(sql, parameters);
                 return RedirectToAction("Index");
             }
-            else
+            catch (Exception ex)
             {
                 ViewBag.showAlert = true;
-                msg = "Staff save failed.";
+                msg = "Staff save failed. Error: " + ex.Message;
                 ViewBag.alertMessage = msg;
+                return View();
             }
-            
-            return View();
         }
 
         public ActionResult Edit(int id)
@@ -70,18 +83,38 @@ namespace SimpleWebApplication.Controllers
         [HttpPost]
         public ActionResult Edit(Staff staff)
         {
-            bool isUpdated = _staffManager.Update(staff);
-            if(isUpdated)
+            var sql = "UPDATE Staff SET Name = @Name, Gender = @Gender, Email = @Email, " +
+              "Phone = @Phone, Address = @Address, Department = @Department, " + "Salary = @Salary WHERE Id = @Id";
+
+            var parameters = new[]
             {
+                new SqlParameter("@Id", staff.Id),
+                new SqlParameter("@Name", staff.Name),
+                new SqlParameter("@Gender", staff.Gender),
+                new SqlParameter("@Email", staff.Email),
+                new SqlParameter("@Phone", staff.Phone),
+                new SqlParameter("@Address", staff.Address),
+                new SqlParameter("@Department", staff.Department),
+                new SqlParameter("@Salary", staff.Salary),
+            };
+
+            try
+            {
+                _dBContext.Database.ExecuteSqlRaw(sql, parameters);
                 return RedirectToAction("Index");
             }
-            return View(staff);
+            catch (Exception ex)
+            {
+                ViewBag.showAlert = true;
+                ViewBag.alertMessage = "Staff update failed. Error: " + ex.Message;
+                return View(staff);
+            }
         }
 
         public ActionResult Details(int id)
         {
-            var staff = _staffManager.GetById(id);
-            if(staff==null)
+            var staff = _dBContext.Staff.FromSqlRaw($"SELECT * FROM Staff WHERE Id = {id}").FirstOrDefault();
+            if (staff==null)
             {
                 return NotFound();
             }
@@ -99,14 +132,27 @@ namespace SimpleWebApplication.Controllers
         }
 
         [HttpPost]
-        public ActionResult Delete(Staff staff)
+        public ActionResult DeleteConfirmed(int id)
         {
-            bool isDelected = _staffManager.Delete(staff);
+            /*bool isDelected = _staffManager.Delete(staff);
             if(isDelected)
             {
                 return RedirectToAction("Index");
             }
-            return View(staff);
+            return View(staff);*/
+            string sql = $"DELETE FROM Staff WHERE Id = {id}";
+
+            try
+            {
+                _dBContext.Database.ExecuteSqlRaw(sql);
+                return RedirectToAction("Index");
+            }
+            catch (Exception)
+            {
+                ViewBag.showAlert = true;
+                ViewBag.alertMessage = "Error deleting staff record.";
+                return RedirectToAction("Index");
+            }
         }
     }
 }
