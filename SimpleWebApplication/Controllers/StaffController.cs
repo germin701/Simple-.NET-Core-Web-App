@@ -1,4 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.Data.SqlClient;
+using Microsoft.EntityFrameworkCore;
 using SimpleWebApplication.Data;
 using SimpleWebApplication.Interfaces.Manager;
 using SimpleWebApplication.Manager;
@@ -19,10 +21,16 @@ namespace SimpleWebApplication.Controllers
             _dBContext = dBContext;
             _staffManager = new StaffManager(_dBContext);
         }
-        public IActionResult Index()
+        public IActionResult Index(string searchString)
         {
-            var staffs = _staffManager.GetAll();
-            return View(staffs);
+            if (!string.IsNullOrEmpty(searchString))
+            {
+                var staffs = _dBContext.Staff.FromSqlRaw("EXEC SearchStaff @SearchString", new SqlParameter("@SearchString", searchString)).ToList();
+                return View(staffs);
+            }
+
+            var allstaffs = _dBContext.Staff.ToList();
+            return View(allstaffs);
         }
 
         public IActionResult Create()
